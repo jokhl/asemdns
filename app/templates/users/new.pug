@@ -1,0 +1,20 @@
+extends ../layout.pug
+
+block head
+  title AsemDNS | New User
+
+block content
+  h1.title-page New User
+  include ../shared/notifications.pug
+  form(method='POST', action='/users', class='form-default')
+    div.input
+      label Username
+      input(type='text', name='username')
+    div.input
+      label Password
+      input(type='password', name='password')
+    div.input
+      label Password confirmation
+      input(type='password', name='password_confirmation')
+    div.flex.justify-end
+      button(type='submit', class='mt-4 btn') Create

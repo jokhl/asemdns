@@ -1,0 +1,43 @@
+extends ../layout.pug
+
+block head
+  title AsemDNS | Domain #{domain.name}
+
+block content
+  div.flex.items-center.justify-between.title-page
+    h1 DNS Records
+    div.flex.items-center
+      a(href=`/domain/${domain.name}/records/new`)
+        img(src='/icons/add.png')
+
+  p.text-sm Domain #[span.font-semibold.text-gray-600 #{domain.name}].
+
+  include ../shared/notifications.pug
+
+  form(method='POST', action=`/domains/${domain.name}/records`, class='w-full form-inline')
+    table.mt-2.table-default
+      thead
+        tr
+          th(class='w-1/3 text-left') Hostname
+          th(class='w-1/5 text-left') Type
+          th(class='w-1/3 text-left') Value
+          th
+      tbody
+        each record, hostname in domain.records
+          tr
+            td= hostname
+            td= record.type
+            td= record.value
+            td.text-right
+              a(class='pl-1 link', href=`/domains/${domain.name}/records/${hostname}/delete`) delete
+        tr
+          td
+            input(type='text', name='hostname', placeholder="Hostname", class='w-full')
+          td
+            select(name='type', class='w-full')
+              each recordType in recordTypes
+                option(value=recordType)= recordType
+          td
+            input(type='text', name='value', placeholder="Value", class='w-full')
+          td
+            button(type='submit', class='btn', class='w-full') Add

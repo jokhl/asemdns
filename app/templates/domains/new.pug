@@ -1,0 +1,14 @@
+extends ../layout.pug
+
+block head
+  title AsemDNS | New Domain
+
+block content
+  h1.title-page New Domain
+  include ../shared/notifications.pug
+  form(method='POST', action='/domains', class='form-default')
+    div.input
+      label Name
+      input(type='text', name='name')
+    div.flex.justify-end
+      button(type='submit', class='mt-4 btn') Create

@@ -1,0 +1,27 @@
+extends ../layout.pug
+
+block head
+  title AsemDNS | Users
+
+block content
+  div.flex.items-center.justify-between.title-page
+    h1 Users
+    div.flex.items-center
+      a(href='/users/new')
+        img(src='/icons/add.png')
+  include ../shared/notifications.pug
+  if users && users.length > 0
+    table.w-full.table-default
+      thead
+        tr
+          th.text-left Username
+          th
+      tbody
+        each user in users
+          tr
+            td= user.username
+            td.text-right
+              a(class='link', href=`/users/${user.username}`) view
+              a(class='pl-1 link', href=`/users/delete/${user.username}`) delete
+  else
+    p.text-sm There is no user yet.

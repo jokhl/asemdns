@@ -1,0 +1,21 @@
+extends ../login_layout.pug
+
+block head
+  title AsemDNS | Login
+
+block content
+  include ../shared/notifications.pug
+  form(method='POST' action='/login' class='w-full form-default')
+    div.input
+      label Username
+      input(type='text' name='username')
+    div.input
+      label Password
+      input(type='password' name='password')
+    div.flex.items-center.justify-between.mt-4
+      div
+        a(href='' class='link') Forgot password
+      div
+        input(type='checkbox' name='remember_me')
+        label(for='remember_me' class='pl-1 pr-2 text-gray-700') Remember me
+        button(type='submit' class='btn') Login

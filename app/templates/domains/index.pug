@@ -1,0 +1,29 @@
+extends ../layout.pug
+
+block head
+  title AsemDNS | Domains
+
+block content
+  div.flex.items-center.justify-between.title-page
+    h1 Domains
+    div.flex.items-center
+      a(href='/domains/new')
+        img(src='/icons/add.png')
+        
+  include ../shared/notifications.pug
+  
+  if domains && domains.length > 0
+    table.w-full.table-default
+      thead
+        tr
+          th.text-left Name
+          th
+      tbody
+        each domain in domains
+          tr
+            td= domain.name
+            td.text-right
+              a(class='link', href=`/domains/${domain.name}`) view
+              a(class='pl-1 link', href=`/domains/${domain.name}/delete`) delete
+  else
+    p.text-sm There is no domain yet.
